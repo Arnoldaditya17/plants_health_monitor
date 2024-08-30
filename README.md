@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # plant_health_monitor
 
 A new Flutter project.
@@ -14,3 +15,6 @@ A few resources to get you started if this is your first Flutter project:
 For help getting started with Flutter development, view the
 [online documentation](https://docs.flutter.dev/), which offers tutorials,
 samples, guidance on mobile development, and a full API reference.
+=======
+# plants_health_monitor
+>>>>>>> 5cdc9fd6e70b84016a4628b292955e5eecc7a165
