@@ -15,11 +15,12 @@ class AppDrawer extends StatelessWidget {
               children: <Widget>[
                 CircleAvatar(
                   radius: 40,
-                  backgroundImage: AssetImage('assets/profile_picture.png'),
+                  backgroundImage: NetworkImage(
+                      'https://avatars.githubusercontent.com/u/94311328?v=4'),
                 ),
                 SizedBox(height: 16),
                 Text(
-                  'User Name',
+                  'aditya singh',
                   style: TextStyle(
                     color: Colors.black,
                     fontSize: 10,
@@ -27,7 +28,7 @@ class AppDrawer extends StatelessWidget {
                   ),
                 ),
                 Text(
-                  'user@example.com',
+                  'aditya@gmail.com',
                   style: TextStyle(
                     color: Colors.black,
                   ),

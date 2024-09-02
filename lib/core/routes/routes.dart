@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:plant_health_monitor/utils/routes/routes_name.dart';
-
-import '../../view/home_screen.dart';
-import '../../view/login_screen.dart';
-
+import 'package:plant_health_monitor/core/routes/routes_name.dart';
+import 'package:plant_health_monitor/features/auth/presentation/pages/signin_page.dart';
+import 'package:plant_health_monitor/features/auth/presentation/pages/signup_page.dart';
+import '../../features/home/presentation/pages/home_screen.dart';
 
 class Routes {
   static Route<dynamic> generateRoutes(RouteSettings settings) {
@@ -12,10 +11,15 @@ class Routes {
         return MaterialPageRoute(
           builder: (BuildContext context) => const HomeScreen(),
         );
-      case RoutesName.login:
+      case RoutesName.signin:
         return MaterialPageRoute(
-          builder: (BuildContext context) => const LoginScreen(),
+          builder: (BuildContext context) => const SignInPage(),
         );
+      case RoutesName.signup:
+        return MaterialPageRoute(
+          builder: (BuildContext context) => const SignUpPage(),
+        );
+
       default:
         return MaterialPageRoute(
           builder: (_) {

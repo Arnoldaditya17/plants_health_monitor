@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:plant_health_monitor/utils/routes/routes.dart';
-import 'package:plant_health_monitor/utils/routes/routes_name.dart';
+import 'package:plant_health_monitor/core/theme/theme.dart';
+import 'core/routes/routes.dart';
+import 'core/routes/routes_name.dart';
 
 void main() {
   runApp(const MyApp());
@@ -14,12 +15,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
-      ),
-      initialRoute: RoutesName.home,
+      title: 'plant health monitor app',
+      theme: AppTheme.darkThemeMode,
+      initialRoute: RoutesName.signin,
       onGenerateRoute: Routes.generateRoutes,
     );
   }
