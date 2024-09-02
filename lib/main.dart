@@ -15,7 +15,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'plant health monitor app',
+      title: 'plants health monitor app',
       theme: AppTheme.darkThemeMode,
       initialRoute: RoutesName.signin,
       onGenerateRoute: Routes.generateRoutes,
