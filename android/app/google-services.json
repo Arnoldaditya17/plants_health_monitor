@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "324980708177",
+    "project_id": "plant-health-monitor-58b53",
+    "storage_bucket": "plant-health-monitor-58b53.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:324980708177:android:31b7fc2b350afd0f0f3970",
+        "android_client_info": {
+          "package_name": "com.example.plant_health_monitor"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCKfAmUm8yR5MzvNKkG5VDjZ0BaPy-sVLs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
