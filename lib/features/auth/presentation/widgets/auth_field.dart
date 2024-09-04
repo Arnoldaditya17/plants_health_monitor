@@ -6,7 +6,10 @@ class AuthField extends StatelessWidget {
   final bool isObscureText;
 
   const AuthField(
-      {super.key, required this.hintText, required this.textEditingController,this.isObscureText=false});
+      {super.key,
+      required this.hintText,
+      required this.textEditingController,
+      this.isObscureText = false});
 
   @override
   Widget build(BuildContext context) {

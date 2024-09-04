@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:plant_health_monitor/features/bluetooth/presentation/pages/bluetooth_screen.dart';
 import 'package:plant_health_monitor/features/home/presentation/pages/chat.dart';
 import 'package:plant_health_monitor/features/home/presentation/pages/dash_board.dart';
 
@@ -75,7 +76,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   MaterialButton(
                     onPressed: () {
                       setState(() {
-                        currentScreen = const Chat();
+                        currentScreen = BluetoothScreen();
                         currentTab = 1;
                       });
                     },

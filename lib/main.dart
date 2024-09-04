@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'plants health monitor app',
       theme: AppTheme.darkThemeMode,
-      initialRoute: RoutesName.signin,
+      initialRoute: RoutesName.bluetooth,
       onGenerateRoute: Routes.generateRoutes,
     );
   }

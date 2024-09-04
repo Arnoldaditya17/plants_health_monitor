@@ -14,8 +14,8 @@ class AuthGradientButton extends StatelessWidget {
         borderRadius: BorderRadius.circular(7),
         gradient: LinearGradient(
           colors: [
-            AppPallet.green,
             AppPallet.gradient2,
+            AppPallet.blue,
           ],
           begin: Alignment.bottomLeft,
           end: Alignment.topRight,
@@ -24,7 +24,7 @@ class AuthGradientButton extends StatelessWidget {
       child: ElevatedButton(
         onPressed: ontap,
         style: ElevatedButton.styleFrom(
-          fixedSize: const Size(395, 55),
+          fixedSize: const Size(395, 57),
           backgroundColor: AppPallet.transparent,
           shadowColor: AppPallet.transparent,
         ),
