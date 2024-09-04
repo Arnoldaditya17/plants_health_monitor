@@ -27,34 +27,26 @@ class _BluetoothScreenState extends State<BluetoothScreen> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Expanded(
-                  child: StreamBuilder<List<ScanResult>>(
-                    stream: controller.scanResult,
-                    builder: (context, snapshot) {
-                      if (snapshot.hasError) {
-                        return const Center(
-                          child: Text('Error occurred'),
-                        );
-                      }
-                      if (snapshot.hasData) {
-                        final results = snapshot.data!;
-                        return ListView.builder(
-                          itemCount: results.length,
+                StreamBuilder<List<ScanResult>>(
+                  stream: controller.scanResult,
+                  builder: (context, snapshot) {
+                    if (snapshot.hasError) {
+                      return const Center(
+                        child: Text('Error occurred'),
+                      );
+                    }
+                    if (snapshot.hasData) {
+                      return Expanded(
+                        child: ListView.builder(
+                          shrinkWrap: true,
+                          itemCount: snapshot.data!.length,
                           itemBuilder: (context, index) {
-                            final data = results[index];
-                            final isConnected = controller.connectedDevices
-                                .contains(data.device);
+                            final data = snapshot.data![index];
                             return Padding(
                               padding: const EdgeInsets.symmetric(
                                   horizontal: 14, vertical: 2),
                               child: Card(
                                 child: ListTile(
-                                  leading: Icon(
-                                    isConnected
-                                        ? Icons.bluetooth_connected
-                                        : Icons.bluetooth_disabled,
-                                    color: isConnected ? Colors.red : null,
-                                  ),
                                   title: Text(data.device.name.isNotEmpty
                                       ? data.device.name
                                       : 'Unknown Device'),
@@ -62,25 +54,20 @@ class _BluetoothScreenState extends State<BluetoothScreen> {
                                   trailing: Text(
                                     data.rssi.toString(),
                                   ),
-                                  onTap: () {
-                                    if (isConnected) {
-                                      // Handle already connected device tap
-                                    } else {
-                                      controller.connectToDevice(data.device);
-                                    }
-                                  },
+                                  onTap: () =>
+                                      controller.connectToDevice(data.device),
                                 ),
                               ),
                             );
                           },
-                        );
-                      } else {
-                        return const Center(
-                          child: Text('No device found'),
-                        );
-                      }
-                    },
-                  ),
+                        ),
+                      );
+                    } else {
+                      return const Center(
+                        child: Text('No device found'),
+                      );
+                    }
+                  },
                 ),
                 const SizedBox(
                   height: 10,
