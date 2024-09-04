@@ -1,6 +1,12 @@
+import 'dart:convert';
+
 import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:plant_health_monitor/core/routes/routes_name.dart';
 import 'package:plant_health_monitor/main.dart';
+import 'package:plant_health_monitor/main.dart';
+
+import '../main.dart';
 
 Future<void> handleBackgroundMessage(RemoteMessage message) async {
   print('Title:${message.notification?.title}');
@@ -12,18 +18,23 @@ Future<void> handleBackgroundMessage(RemoteMessage message) async {
 
 class FirebaseApi {
   final _firebaseMessaging = FirebaseMessaging.instance;
+  final _androidChannel = const AndroidNotificationChannel(
+    'high_importance_channel',
+    'High Importance Notifications',
+    description: "This channel is used for important notifications",
+    importance: Importance.defaultImportance,
+  );
+  final _localNotifications = FlutterLocalNotificationsPlugin();
 
   Future<void> initNotifications() async {
     await _firebaseMessaging.requestPermission();
     final FCMToken = await _firebaseMessaging.getToken();
     print('Token:$FCMToken');
     initPushNotification();
+    initLocalNotifications();
   }
 
   void handleMessage(RemoteMessage? message) {
-    print(
-        "8888888888888888888888888888888--------------------------999999999999999999999999999${message?.notification?.body}");
-
     if (message == null) {
       return;
     }
@@ -31,6 +42,30 @@ class FirebaseApi {
       RoutesName.notification,
       arguments: message,
     );
+  }
+
+  Future initLocalNotifications() async {
+    const iOS = DarwinInitializationSettings();
+    const android = AndroidInitializationSettings('@drawable/ic_launcher.png');
+    const settings = InitializationSettings(android: android, iOS: iOS);
+    await _localNotifications.initialize(
+      settings,
+      onDidReceiveNotificationResponse: (response) {
+        print('Notification clicked with payload: ${response.payload}');
+        if (response.payload != null) {
+          try {
+            final message =
+                RemoteMessage.fromMap(jsonDecode(response.payload!));
+            handleMessage(message);
+          } catch (e) {
+            print('Error parsing notification payload: $e');
+          }
+        }
+      },
+    );
+    final platform = _localNotifications.resolvePlatformSpecificImplementation<
+        AndroidFlutterLocalNotificationsPlugin>();
+    await platform?.createNotificationChannel(_androidChannel);
   }
 
   Future initPushNotification() async {
@@ -43,5 +78,29 @@ class FirebaseApi {
     FirebaseMessaging.instance.getInitialMessage().then(handleMessage);
     FirebaseMessaging.onMessageOpenedApp.listen(handleMessage);
     FirebaseMessaging.onBackgroundMessage(handleBackgroundMessage);
+    FirebaseMessaging.onMessage.listen(
+      (message) {
+        final notification = message.notification;
+        if (notification == null) {
+          return;
+        }
+        _localNotifications.show(
+          notification.hashCode,
+          notification.title,
+          notification.body,
+          NotificationDetails(
+            android: AndroidNotificationDetails(
+              _androidChannel.id,
+              _androidChannel.name,
+              channelDescription: _androidChannel.description,
+              icon: '@drawable/ic_launcher',
+            ),
+          ),
+          payload: jsonEncode(
+            message.toMap(),
+          ),
+        );
+      },
+    );
   }
 }

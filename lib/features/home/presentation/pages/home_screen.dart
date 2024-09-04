@@ -76,7 +76,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   MaterialButton(
                     onPressed: () {
                       setState(() {
-                        currentScreen = BluetoothScreen();
+                        currentScreen = const BluetoothScreen();
                         currentTab = 1;
                       });
                     },
